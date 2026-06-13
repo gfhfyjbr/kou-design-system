@@ -243,33 +243,33 @@ function S({ tone: e, children: t }) {
 	});
 }
 //#endregion
-//#region src/lib/cx.ts
-function C(...e) {
-	return e.filter(Boolean).join(" ");
-}
-//#endregion
 //#region src/components/ui/Button.tsx
-function w({ variant: e = "default", tiny: t, className: n, ...r }) {
+function C({ variant: e = "default", tiny: t, className: n, ...r }) {
 	return /* @__PURE__ */ u("button", {
-		className: C("btn", e !== "default" && e, t && "tiny", n),
+		className: [
+			"btn",
+			e === "default" ? "" : e,
+			t ? "tiny" : "",
+			n ?? ""
+		].filter(Boolean).join(" "),
 		...r
 	});
 }
 //#endregion
 //#region src/components/ui/Panel.tsx
+function w({ className: e, ...t }) {
+	return /* @__PURE__ */ u("div", {
+		className: ["panel", e ?? ""].filter(Boolean).join(" "),
+		...t
+	});
+}
 function T({ className: e, ...t }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("panel", e),
+		className: ["panel-h", e ?? ""].filter(Boolean).join(" "),
 		...t
 	});
 }
-function E({ className: e, ...t }) {
-	return /* @__PURE__ */ u("div", {
-		className: C("panel-h", e),
-		...t
-	});
-}
-function D({ children: e, kana: t }) {
+function E({ children: e, kana: t }) {
 	return /* @__PURE__ */ d("div", {
 		className: "ttl",
 		children: [
@@ -284,7 +284,7 @@ function D({ children: e, kana: t }) {
 }
 //#endregion
 //#region src/components/ui/Spark.tsx
-function O({ seed: e }) {
+function D({ seed: e }) {
 	let t = 2166136261;
 	for (let n of e) t = Math.imul(t ^ n.charCodeAt(0), 16777619) >>> 0;
 	let n = [];
@@ -310,7 +310,7 @@ function O({ seed: e }) {
 }
 //#endregion
 //#region src/components/ui/TiltCard.tsx
-function k({ max: e = 9, ripple: t = !0, onClick: n, children: r, ...i }) {
+function O({ max: e = 9, ripple: t = !0, onClick: n, children: r, ...i }) {
 	let a = s(null);
 	return /* @__PURE__ */ u("div", {
 		ref: a,
@@ -337,21 +337,24 @@ function k({ max: e = 9, ripple: t = !0, onClick: n, children: r, ...i }) {
 }
 //#endregion
 //#region src/components/ui/Card.tsx
+function k(...e) {
+	return e.filter(Boolean).join(" ");
+}
 function A(e) {
-	return /* @__PURE__ */ u(T, { ...e });
+	return /* @__PURE__ */ u(w, { ...e });
 }
 function j(e) {
-	return /* @__PURE__ */ u(E, { ...e });
+	return /* @__PURE__ */ u(T, { ...e });
 }
 function M({ children: e, kana: t }) {
-	return /* @__PURE__ */ u(D, {
+	return /* @__PURE__ */ u(E, {
 		kana: t,
 		children: e
 	});
 }
 function N({ label: e, kana: t, value: n, accent: r, sparkSeed: i, className: a, children: o, ...s }) {
-	return /* @__PURE__ */ d(k, {
-		className: C("stat", r && "accent", a),
+	return /* @__PURE__ */ d(O, {
+		className: k("stat", r && "accent", a),
 		...s,
 		children: [
 			/* @__PURE__ */ d("div", {
@@ -366,7 +369,7 @@ function N({ label: e, kana: t, value: n, accent: r, sparkSeed: i, className: a,
 				children: n
 			}),
 			o,
-			i && /* @__PURE__ */ u(O, { seed: i })
+			i && /* @__PURE__ */ u(D, { seed: i })
 		]
 	});
 }
@@ -374,12 +377,19 @@ function N({ label: e, kana: t, value: n, accent: r, sparkSeed: i, className: a,
 //#region src/components/ui/Chip.tsx
 function P({ mono: e, className: t, ...n }) {
 	return /* @__PURE__ */ u("span", {
-		className: C("chip", e && "mono", t),
+		className: [
+			"chip",
+			e ? "mono" : "",
+			t ?? ""
+		].filter(Boolean).join(" "),
 		...n
 	});
 }
 //#endregion
 //#region src/components/ui/DataTable.tsx
+function ee(...e) {
+	return e.filter(Boolean).join(" ");
+}
 function F({ className: e, style: t, ...n }) {
 	return /* @__PURE__ */ u("div", {
 		className: e,
@@ -392,7 +402,7 @@ function F({ className: e, style: t, ...n }) {
 }
 function I({ className: e, ...t }) {
 	return /* @__PURE__ */ u("table", {
-		className: C("table", e),
+		className: ee("table", e),
 		...t
 	});
 }
@@ -419,14 +429,6 @@ function z({ colSpan: e = 1, children: t }) {
 		colSpan: e,
 		children: t
 	}) });
-}
-//#endregion
-//#region src/components/ui/Divider.tsx
-function ee({ subtle: e, className: t, ...n }) {
-	return /* @__PURE__ */ u("hr", {
-		className: C("divider", e && "subtle", t),
-		...n
-	});
 }
 //#endregion
 //#region src/components/ui/Dropdown.tsx
@@ -576,108 +578,108 @@ function H({ label: e, children: t }) {
 var U = n(function({ className: e, ...t }, n) {
 	return /* @__PURE__ */ u("input", {
 		ref: n,
-		className: C("inp", e),
+		className: ["inp", e ?? ""].filter(Boolean).join(" "),
 		...t
 	});
 }), ne = n(function({ className: e, ...t }, n) {
 	return /* @__PURE__ */ u("textarea", {
 		ref: n,
-		className: C("inp", e),
+		className: ["inp", e ?? ""].filter(Boolean).join(" "),
 		...t
 	});
 }), re = n(function({ className: e, ...t }, n) {
 	return /* @__PURE__ */ u("select", {
 		ref: n,
-		className: C("inp", e),
+		className: ["inp", e ?? ""].filter(Boolean).join(" "),
 		...t
 	});
 });
 //#endregion
-//#region src/components/ui/Kbd.tsx
-function ie({ className: e, ...t }) {
-	return /* @__PURE__ */ u("kbd", {
-		className: C("kbd", e),
-		...t
-	});
-}
-//#endregion
 //#region src/components/ui/Lamp.tsx
 function W({ tone: e = "idle", pulse: t, on: n }) {
-	return /* @__PURE__ */ u("span", { className: C("lamp", e !== "idle" && e, t && "pulse", n && "on") });
+	return /* @__PURE__ */ u("span", { className: [
+		"lamp",
+		e === "idle" ? "" : e,
+		t ? "pulse" : "",
+		n ? "on" : ""
+	].filter(Boolean).join(" ") });
 }
 //#endregion
 //#region src/components/ui/Layout.tsx
-function ae({ rail: e, children: t, className: n, ...r }) {
+function G(...e) {
+	return e.filter(Boolean).join(" ");
+}
+function ie({ rail: e, children: t, className: n, ...r }) {
 	return /* @__PURE__ */ d("div", {
-		className: C("app", n),
+		className: G("app", n),
 		...r,
 		children: [e, t]
 	});
 }
-function oe({ className: e, ...t }) {
+function ae({ className: e, ...t }) {
 	return /* @__PURE__ */ u("main", {
 		className: e,
 		...t
 	});
 }
-function se({ logs: e, className: t, ...n }) {
+function oe({ logs: e, className: t, ...n }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("views", e && "views-logs", t),
+		className: G("views", e && "views-logs", t),
 		...n
 	});
 }
-function ce({ active: e = !0, viewId: t, className: n, ...r }) {
+function se({ active: e = !0, viewId: t, className: n, ...r }) {
 	return /* @__PURE__ */ u("section", {
 		id: t ? `view-${t}` : void 0,
-		className: C("view", e && "active", n),
+		className: G("view", e && "active", n),
 		...r
+	});
+}
+function ce({ className: e, ...t }) {
+	return /* @__PURE__ */ u("div", {
+		className: G("ov-grid", e),
+		...t
 	});
 }
 function le({ className: e, ...t }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("ov-grid", e),
+		className: G("ov-side", e),
 		...t
 	});
 }
 function ue({ className: e, ...t }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("ov-side", e),
+		className: G("view-bar", e),
 		...t
 	});
 }
 function de({ className: e, ...t }) {
-	return /* @__PURE__ */ u("div", {
-		className: C("view-bar", e),
-		...t
-	});
-}
-function fe({ className: e, ...t }) {
 	return /* @__PURE__ */ u("span", {
-		className: C("spacer", e),
-		...t
-	});
-}
-function G({ className: e, ...t }) {
-	return /* @__PURE__ */ u("div", {
-		className: C("pad", e),
+		className: G("spacer", e),
 		...t
 	});
 }
 function K({ className: e, ...t }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("form-row", e),
+		className: G("pad", e),
+		...t
+	});
+}
+function fe({ className: e, ...t }) {
+	return /* @__PURE__ */ u("div", {
+		className: G("form-row", e),
 		...t
 	});
 }
 function pe({ className: e, ...t }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("models-grid", e),
+		className: G("models-grid", e),
 		...t
 	});
 }
 function me({ className: e, ...t }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("settings-grid", e),
+		className: G("settings-grid", e),
 		...t
 	});
 }
@@ -742,7 +744,7 @@ function q({ open: e, onClose: t, title: n, kana: r, children: i, footer: o, wid
 		children: /* @__PURE__ */ d("div", {
 			className: "modal" + (s ? " wide" : ""),
 			children: [
-				/* @__PURE__ */ u(E, { children: /* @__PURE__ */ u(D, {
+				/* @__PURE__ */ u(T, { children: /* @__PURE__ */ u(E, {
 					kana: r,
 					children: n
 				}) }),
@@ -760,10 +762,13 @@ function q({ open: e, onClose: t, title: n, kana: r, children: i, footer: o, wid
 }
 //#endregion
 //#region src/components/ui/Status.tsx
+function J(...e) {
+	return e.filter(Boolean).join(" ");
+}
 function ye({ mode: e, children: t, className: n, ...r }) {
 	let i = t ?? (e === "live" ? "LIVE" : e === "demo" ? "DEMO" : "CONNECTING");
 	return /* @__PURE__ */ d("div", {
-		className: C("modechip", e === "live" && "live", e === "demo" && "demo", n),
+		className: J("modechip", e === "live" && "live", e === "demo" && "demo", n),
 		...r,
 		children: [/* @__PURE__ */ u(W, {
 			tone: e === "live" ? "ok" : e === "demo" ? "warn" : "idle",
@@ -792,7 +797,7 @@ function xe({ active: e }) {
 }
 function Se({ color: e, className: t, style: n, ...r }) {
 	return /* @__PURE__ */ u("span", {
-		className: C("line-dot", t),
+		className: J("line-dot", t),
 		style: {
 			background: e,
 			color: e,
@@ -807,44 +812,47 @@ function Ce({ color: e }) {
 		color: e
 	});
 }
-function J({ label: e, children: t, className: n, ...r }) {
+function Y({ label: e, children: t, className: n, ...r }) {
 	return /* @__PURE__ */ d("div", {
-		className: C("kv", n),
+		className: J("kv", n),
 		...r,
 		children: [/* @__PURE__ */ u("span", { children: e }), /* @__PURE__ */ u("b", { children: t })]
 	});
 }
 function we({ items: e, className: t, ...n }) {
 	return /* @__PURE__ */ u("div", {
-		className: C("prov-meta", t),
+		className: J("prov-meta", t),
 		...n,
 		children: e.map((e, t) => /* @__PURE__ */ d("div", { children: [/* @__PURE__ */ u("dt", { children: e.label }), /* @__PURE__ */ u("dd", { children: e.value })] }, t))
 	});
 }
 //#endregion
 //#region src/components/ui/Typography.tsx
-function Te({ as: e = "span", className: t, ...n }) {
-	return /* @__PURE__ */ u(e, {
-		className: C("mono", t),
-		...n
-	});
+function Te(...e) {
+	return e.filter(Boolean).join(" ");
 }
 function Ee({ as: e = "span", className: t, ...n }) {
 	return /* @__PURE__ */ u(e, {
-		className: C("kana", t),
+		className: Te("mono", t),
 		...n
 	});
 }
-function Y({ as: e = "span", className: t, ...n }) {
+function De({ as: e = "span", className: t, ...n }) {
 	return /* @__PURE__ */ u(e, {
-		className: C("mut", t),
+		className: Te("kana", t),
+		...n
+	});
+}
+function X({ as: e = "span", className: t, ...n }) {
+	return /* @__PURE__ */ u(e, {
+		className: Te("mut", t),
 		...n
 	});
 }
 //#endregion
 //#region src/components/ui/toast.tsx
-var De = t(() => {}), Oe = () => i(De);
-function ke({ children: e }) {
+var Oe = t(() => {}), ke = () => i(Oe);
+function Ae({ children: e }) {
 	let [t, n] = c([]), i = s(0), a = r((e, t = "ok") => {
 		let r = ++i.current;
 		n((n) => [...n, {
@@ -857,7 +865,7 @@ function ke({ children: e }) {
 			fading: !0
 		} : e)), 3400), setTimeout(() => n((e) => e.filter((e) => e.id !== r)), 3900);
 	}, []);
-	return /* @__PURE__ */ d(De.Provider, {
+	return /* @__PURE__ */ d(Oe.Provider, {
 		value: a,
 		children: [e, /* @__PURE__ */ u("div", {
 			className: "toasts",
@@ -874,7 +882,7 @@ function ke({ children: e }) {
 }
 //#endregion
 //#region src/components/kou/types.ts
-var Ae = {
+var je = {
 	overview: {
 		t: "Overview",
 		k: "概況"
@@ -899,40 +907,40 @@ var Ae = {
 		t: "Settings",
 		k: "設定"
 	}
-}, je = [
+}, Me = [
 	"#8b7cf6",
 	"#4f8ef7",
 	"#ffb454",
 	"#f56fa1",
 	"#9ad24f"
 ];
-function X(e, t = 0) {
+function Z(e, t = 0) {
 	let n = `${e.provider || ""} ${e.name || ""} ${e.id || ""}`.toLowerCase();
-	return /claude|anthropic/.test(n) ? "var(--claude)" : /codex|openai|gpt/.test(n) ? "var(--codex)" : /gemini|google/.test(n) ? "#7aa2ff" : je[t % je.length];
+	return /claude|anthropic/.test(n) ? "var(--claude)" : /codex|openai|gpt/.test(n) ? "var(--codex)" : /gemini|google/.test(n) ? "#7aa2ff" : Me[t % Me.length];
 }
-function Me(e) {
+function Ne(e) {
 	let t = (e.name || e.provider || "??").replace(/[^a-zA-Z0-9 ]/g, " ").trim(), n = t.split(/\s+/);
 	return (n.length > 1 ? n[0][0] + n[1][0] : t.slice(0, 2)).toUpperCase();
 }
-function Z(e) {
+function Q(e) {
 	let t = (e || "").toLowerCase();
 	return /claude|anthropic/.test(t) ? "var(--claude)" : /codex|gpt|o\d|openai/.test(t) ? "var(--codex)" : "#8b7cf6";
 }
 //#endregion
 //#region src/components/kou/views.tsx
-function Ne(e) {
+function Pe(e) {
 	if (!e) return "—";
 	let t = (Date.now() - new Date(e).getTime()) / 1e3;
 	return t < 0 ? "soon" : t < 60 ? Math.floor(t) + "s ago" : t < 3600 ? Math.floor(t / 60) + "m ago" : t < 86400 ? Math.floor(t / 3600) + "h ago" : Math.floor(t / 86400) + "d ago";
 }
-function Pe(e, t = !1) {
+function Fe(e, t = !1) {
 	let n = (e) => String(e).padStart(2, "0");
 	return t ? n(e.getUTCHours()) + ":" + n(e.getUTCMinutes()) : n(e.getHours()) + ":" + n(e.getMinutes()) + ":" + n(e.getSeconds());
 }
-function Fe(e) {
+function Ie(e) {
 	return e.enabled ? e.rate_limited_until && new Date(e.rate_limited_until) > /* @__PURE__ */ new Date() ? ["warn", "LIMITED"] : e.circuit_open_until && new Date(e.circuit_open_until) > /* @__PURE__ */ new Date() ? ["err", "TRIPPED"] : e.last_error ? ["warn", "ERR·SEEN"] : ["ok", "READY"] : ["off", "OFF"];
 }
-var Ie = [
+var Le = [
 	{
 		view: "overview",
 		label: "Overview",
@@ -1038,7 +1046,7 @@ var Ie = [
 			]
 		})
 	}
-], Le = {
+], Re = {
 	connecting: {
 		tone: "idle",
 		text: "BOOT…"
@@ -1052,8 +1060,8 @@ var Ie = [
 		text: "DEMO"
 	}
 };
-function Re({ view: e, mode: t, onNavigate: n, version: r = "kou v0.1" }) {
-	let i = Le[t];
+function ze({ view: e, mode: t, onNavigate: n, version: r = "kou v0.1" }) {
+	let i = Re[t];
 	return /* @__PURE__ */ d("aside", {
 		className: "rail",
 		children: [
@@ -1070,7 +1078,7 @@ function Re({ view: e, mode: t, onNavigate: n, version: r = "kou v0.1" }) {
 			/* @__PURE__ */ d("nav", { children: [/* @__PURE__ */ u("span", {
 				className: "nav-cap",
 				children: "DISPATCH · 運行"
-			}), Ie.map((t) => /* @__PURE__ */ d("a", {
+			}), Le.map((t) => /* @__PURE__ */ d("a", {
 				href: "#" + t.view,
 				className: e === t.view ? "active" : void 0,
 				onClick: (e) => {
@@ -1089,7 +1097,7 @@ function Re({ view: e, mode: t, onNavigate: n, version: r = "kou v0.1" }) {
 						tone: i.tone === "idle" ? "idle" : i.tone,
 						pulse: !0
 					}),
-					/* @__PURE__ */ u(Te, { children: i.text }),
+					/* @__PURE__ */ u(Ee, { children: i.text }),
 					/* @__PURE__ */ u("span", {
 						className: "ver",
 						children: r
@@ -1099,29 +1107,29 @@ function Re({ view: e, mode: t, onNavigate: n, version: r = "kou v0.1" }) {
 		]
 	});
 }
-function ze() {
+function Be() {
 	let [e, t] = c(() => /* @__PURE__ */ new Date());
 	return a(() => {
 		let e = setInterval(() => t(/* @__PURE__ */ new Date()), 1e3);
 		return () => clearInterval(e);
 	}, []), e;
 }
-function Be({ view: e, mode: t, showAuthButton: n, onSignOut: r }) {
-	let i = ze(), a = Ae[e];
+function Ve({ view: e, mode: t, showAuthButton: n, onSignOut: r }) {
+	let i = Be(), a = je[e];
 	return /* @__PURE__ */ d("header", {
 		className: "top",
 		children: [/* @__PURE__ */ d("div", {
 			className: "crumb",
-			children: [/* @__PURE__ */ u("h1", { children: a.t }), /* @__PURE__ */ u(Ee, { children: a.k })]
+			children: [/* @__PURE__ */ u("h1", { children: a.t }), /* @__PURE__ */ u(De, { children: a.k })]
 		}), /* @__PURE__ */ d("div", {
 			className: "top-right",
 			children: [
 				/* @__PURE__ */ u(ye, { mode: t }),
 				/* @__PURE__ */ d("div", {
 					className: "clock mono",
-					children: [/* @__PURE__ */ u("span", { children: Pe(i) }), /* @__PURE__ */ d("em", { children: ["UTC ", Pe(i, !0)] })]
+					children: [/* @__PURE__ */ u("span", { children: Fe(i) }), /* @__PURE__ */ d("em", { children: ["UTC ", Fe(i, !0)] })]
 				}),
-				n && /* @__PURE__ */ u(w, {
+				n && /* @__PURE__ */ u(C, {
 					onClick: r,
 					children: "SIGN OUT"
 				})
@@ -1129,7 +1137,7 @@ function Be({ view: e, mode: t, showAuthButton: n, onSignOut: r }) {
 		})]
 	});
 }
-function Ve({ error: e, onSubmit: t }) {
+function He({ error: e, onSubmit: t }) {
 	let [n, r] = c(""), i = () => {
 		t(n);
 	};
@@ -1147,7 +1155,7 @@ function Ve({ error: e, onSubmit: t }) {
 				padding: "26px 24px"
 			},
 			children: [
-				/* @__PURE__ */ u(Y, {
+				/* @__PURE__ */ u(X, {
 					as: "p",
 					style: {
 						fontSize: "11px",
@@ -1177,7 +1185,7 @@ function Ve({ error: e, onSubmit: t }) {
 						}
 					})
 				}),
-				/* @__PURE__ */ u(w, {
+				/* @__PURE__ */ u(C, {
 					variant: "primary",
 					style: {
 						width: "100%",
@@ -1199,7 +1207,7 @@ function Ve({ error: e, onSubmit: t }) {
 		})
 	});
 }
-function He({ e, animate: t }) {
+function Ue({ e, animate: t }) {
 	return /* @__PURE__ */ d("div", {
 		className: "board-r" + (t ? " in" : ""),
 		children: [
@@ -1226,11 +1234,11 @@ function He({ e, animate: t }) {
 		]
 	});
 }
-function Ue({ rows: e, mode: t, animate: n }) {
+function We({ rows: e, mode: t, animate: n }) {
 	return /* @__PURE__ */ d(A, { children: [/* @__PURE__ */ d(j, { children: [/* @__PURE__ */ u(M, {
 		kana: "発車標",
 		children: "DEPARTURES"
-	}), /* @__PURE__ */ u(Y, {
+	}), /* @__PURE__ */ u(X, {
 		className: "mono",
 		style: {
 			marginLeft: "auto",
@@ -1264,7 +1272,7 @@ function Ue({ rows: e, mode: t, animate: n }) {
 					children: "LAT"
 				})
 			]
-		}), e.length ? e.map((e) => /* @__PURE__ */ u(He, {
+		}), e.length ? e.map((e) => /* @__PURE__ */ u(Ue, {
 			e,
 			animate: n
 		}, e.id)) : /* @__PURE__ */ u(V, {
@@ -1273,12 +1281,12 @@ function Ue({ rows: e, mode: t, animate: n }) {
 		})]
 	})] });
 }
-function We({ url: e, onCopy: t }) {
+function Ge({ url: e, onCopy: t }) {
 	return /* @__PURE__ */ d(A, { children: [
 		/* @__PURE__ */ d(j, { children: [/* @__PURE__ */ u(M, {
 			kana: "入口",
 			children: "INGRESS"
-		}), /* @__PURE__ */ u(Y, {
+		}), /* @__PURE__ */ u(X, {
 			className: "mono",
 			style: {
 				marginLeft: "auto",
@@ -1308,7 +1316,7 @@ function We({ url: e, onCopy: t }) {
 		})
 	] });
 }
-function Ge({ rows: e }) {
+function Ke({ rows: e }) {
 	return /* @__PURE__ */ d(A, { children: [/* @__PURE__ */ u(j, { children: /* @__PURE__ */ u(M, {
 		kana: "信号",
 		children: "SIGNALS"
@@ -1333,7 +1341,7 @@ function Ge({ rows: e }) {
 		}, e.id))]
 	})] });
 }
-function Ke(e, t = 900) {
+function qe(e, t = 900) {
 	let [n, r] = c(0), i = s(!1);
 	return a(() => {
 		if (e == null) return;
@@ -1349,8 +1357,8 @@ function Ke(e, t = 900) {
 		return a = requestAnimationFrame(o), () => cancelAnimationFrame(a);
 	}, [e, t]), e == null ? null : n;
 }
-function qe({ tile: e, onNavigate: t }) {
-	let n = Ke(e.value);
+function Je({ tile: e, onNavigate: t }) {
+	let n = qe(e.value);
 	return /* @__PURE__ */ u(N, {
 		label: e.label,
 		kana: e.kana,
@@ -1361,22 +1369,22 @@ function qe({ tile: e, onNavigate: t }) {
 		onClick: () => setTimeout(() => t(e.go), f ? 0 : 160)
 	});
 }
-function Je({ tiles: e, onNavigate: t }) {
+function Ye({ tiles: e, onNavigate: t }) {
 	return /* @__PURE__ */ u("div", {
 		className: "stats",
 		id: "stats",
-		children: e.map((e) => /* @__PURE__ */ u(qe, {
+		children: e.map((e) => /* @__PURE__ */ u(Je, {
 			tile: e,
 			onNavigate: t
 		}, e.label))
 	});
 }
-var Ye = [
+var Xe = [
 	"/v1/messages",
 	"/v1/chat/completions",
 	"/v1/responses"
 ];
-function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate: m, onFlashProvider: h, onAddLine: g, getSignal: _ }) {
+function Ze({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate: m, onFlashProvider: h, onAddLine: g, getSignal: _ }) {
 	let v = s(null), [y, b] = c(null), { H: x, W: S, coreX: C, coreY: w, nodeX: T, cliYs: E, provYs: D, ghostY: O } = o(() => {
 		let e = Math.max(t.length, 1) + 1, n = Math.max(300, 120 + e * 64), r = n / 2;
 		return {
@@ -1385,7 +1393,7 @@ function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate
 			coreX: 520,
 			coreY: r,
 			nodeX: 905,
-			cliYs: Ye.map((e, t) => r + (t - 1) * 58),
+			cliYs: Xe.map((e, t) => r + (t - 1) * 58),
 			provYs: t.map((t, n) => r + (n - (e - 1) / 2) * 64),
 			ghostY: r + (e - 1 - (e - 1) / 2) * 64
 		};
@@ -1405,14 +1413,14 @@ function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate
 			p: e,
 			i: t
 		})).filter((e) => e.p.enabled !== !1);
-		return Ye.forEach((t, a) => {
+		return Xe.forEach((t, a) => {
 			let o = () => {
 				if (!e.isConnected) return;
 				let t = r("cli-" + a, "rgba(238,235,225,.65)", 2.4, 2.2);
 				if (i.length) {
 					let a = i[Math.random() * i.length | 0];
 					n.push(window.setTimeout(() => {
-						e.isConnected && r("trk-" + a.i, X(a.p, a.i), 3, 2.6);
+						e.isConnected && r("trk-" + a.i, Z(a.p, a.i), 3, 2.6);
 					}, t * 1e3 + 140));
 				}
 				n.push(window.setTimeout(o, 1100 + Math.random() * 2600));
@@ -1498,28 +1506,28 @@ function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate
 									/* @__PURE__ */ u("stop", {
 										offset: "0",
 										style: {
-											stopColor: X(e, t),
+											stopColor: Z(e, t),
 											stopOpacity: .08
 										}
 									}),
 									/* @__PURE__ */ u("stop", {
 										offset: ".55",
 										style: {
-											stopColor: X(e, t),
+											stopColor: Z(e, t),
 											stopOpacity: .3
 										}
 									}),
 									/* @__PURE__ */ u("stop", {
 										offset: "1",
 										style: {
-											stopColor: X(e, t),
+											stopColor: Z(e, t),
 											stopOpacity: .95
 										}
 									})
 								]
 							}, e.id))
 						] }),
-						Ye.map((t, n) => /* @__PURE__ */ d(e, { children: [
+						Xe.map((t, n) => /* @__PURE__ */ d(e, { children: [
 							/* @__PURE__ */ u("path", {
 								id: `cli-${n}`,
 								d: k(E[n]),
@@ -1559,7 +1567,7 @@ function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate
 							children: "CLIENTS 入口"
 						}),
 						t.map((t, n) => {
-							let r = D[n], i = X(t, n), a = N(r), o = y === n;
+							let r = D[n], i = Z(t, n), a = N(r), o = y === n;
 							return /* @__PURE__ */ d(e, { children: [/* @__PURE__ */ u("path", {
 								d: a,
 								fill: "none",
@@ -1665,7 +1673,7 @@ function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate
 							})
 						] }),
 						t.map((e, t) => {
-							let a = D[t], o = X(e, t), s = n[e.id] || [], c = s.filter((e) => e.enabled).length, l = e.rate_limited_until && new Date(e.rate_limited_until) > /* @__PURE__ */ new Date(), f = e.enabled === !1 ? "var(--faint)" : l ? "var(--warn)" : "var(--ok)", p = r || i ? `${c || s.length || 0} ACCOUNT${(c || s.length) === 1 ? "" : "S"}` : (e.provider || "").toUpperCase();
+							let a = D[t], o = Z(e, t), s = n[e.id] || [], c = s.filter((e) => e.enabled).length, l = e.rate_limited_until && new Date(e.rate_limited_until) > /* @__PURE__ */ new Date(), f = e.enabled === !1 ? "var(--faint)" : l ? "var(--warn)" : "var(--ok)", p = r || i ? `${c || s.length || 0} ACCOUNT${(c || s.length) === 1 ? "" : "S"}` : (e.provider || "").toUpperCase();
 							return /* @__PURE__ */ d("g", {
 								className: "y-node",
 								opacity: e.enabled === !1 ? .45 : 1,
@@ -1697,7 +1705,7 @@ function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate
 										x: T,
 										y: a + 4.5,
 										textAnchor: "middle",
-										children: Me(e)
+										children: Ne(e)
 									}),
 									/* @__PURE__ */ u("circle", {
 										cx: T + 19,
@@ -1772,11 +1780,11 @@ function Xe({ providers: t, accounts: n, authed: r, demo: i, mode: p, onNavigate
 		]
 	});
 }
-function Ze() {
+function Qe() {
 	return /* @__PURE__ */ u(x, {});
 }
-function Qe({ account: e, onAction: t }) {
-	let [n, r] = Fe(e);
+function $e({ account: e, onAction: t }) {
+	let [n, r] = Ie(e);
 	return /* @__PURE__ */ d("div", {
 		className: "acc-row",
 		children: [
@@ -1798,32 +1806,32 @@ function Qe({ account: e, onAction: t }) {
 				children: [
 					r,
 					" · ",
-					Ne(e.last_used_at),
+					Pe(e.last_used_at),
 					e.proxy_url ? " · proxy" : ""
 				]
 			}),
 			/* @__PURE__ */ d("div", {
 				className: "acc-actions",
 				children: [
-					e.auth_mode === "oauth" && /* @__PURE__ */ u(w, {
+					e.auth_mode === "oauth" && /* @__PURE__ */ u(C, {
 						tiny: !0,
 						"data-act": !0,
 						onClick: () => t("refresh", e),
 						children: "REFRESH"
 					}),
-					/* @__PURE__ */ u(w, {
+					/* @__PURE__ */ u(C, {
 						tiny: !0,
 						"data-act": !0,
 						onClick: () => t(e.enabled ? "disable" : "enable", e),
 						children: e.enabled ? "HOLD" : "RELEASE"
 					}),
-					/* @__PURE__ */ u(w, {
+					/* @__PURE__ */ u(C, {
 						tiny: !0,
 						"data-act": !0,
 						onClick: () => t("proxy", e),
 						children: "PROXY"
 					}),
-					/* @__PURE__ */ u(w, {
+					/* @__PURE__ */ u(C, {
 						tiny: !0,
 						variant: "danger",
 						"data-act": !0,
@@ -1835,8 +1843,8 @@ function Qe({ account: e, onAction: t }) {
 		]
 	});
 }
-function $e({ provider: e, index: t, accounts: n, authed: r, demo: i, flash: o, signal: c, onConnect: l, onAction: f }) {
-	let p = s(null), m = X(e, t);
+function et({ provider: e, index: t, accounts: n, authed: r, demo: i, flash: o, signal: c, onConnect: l, onAction: f }) {
+	let p = s(null), m = Z(e, t);
 	return a(() => {
 		o && p.current?.scrollIntoView({
 			behavior: "smooth",
@@ -1893,7 +1901,7 @@ function $e({ provider: e, index: t, accounts: n, authed: r, demo: i, flash: o, 
 					className: "acc-zone",
 					children: [/* @__PURE__ */ d("div", {
 						className: "acc-head",
-						children: ["ACCOUNTS · 口座", r || i ? /* @__PURE__ */ u(w, {
+						children: ["ACCOUNTS · 口座", r || i ? /* @__PURE__ */ u(C, {
 							tiny: !0,
 							variant: "primary",
 							"data-act": !0,
@@ -1903,7 +1911,7 @@ function $e({ provider: e, index: t, accounts: n, authed: r, demo: i, flash: o, 
 							style: { marginLeft: "auto" },
 							children: "sign in to manage"
 						})]
-					}), (r || i) && (n.length ? n.map((e) => /* @__PURE__ */ u(Qe, {
+					}), (r || i) && (n.length ? n.map((e) => /* @__PURE__ */ u($e, {
 						account: e,
 						onAction: f
 					}, e.id)) : /* @__PURE__ */ u(V, {
@@ -1916,11 +1924,11 @@ function $e({ provider: e, index: t, accounts: n, authed: r, demo: i, flash: o, 
 		})
 	});
 }
-function et({ providers: e, accounts: t, authed: n, demo: r, flashProviderId: i, onImportPreset: a, onConnect: o, onAccountAction: s, getSignal: c }) {
-	return /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ d(de, { children: [
-		/* @__PURE__ */ u(Y, { children: "Provider connections and their authenticated accounts." }),
-		/* @__PURE__ */ u(fe, {}),
-		/* @__PURE__ */ u(w, {
+function tt({ providers: e, accounts: t, authed: n, demo: r, flashProviderId: i, onImportPreset: a, onConnect: o, onAccountAction: s, getSignal: c }) {
+	return /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ d(ue, { children: [
+		/* @__PURE__ */ u(X, { children: "Provider connections and their authenticated accounts." }),
+		/* @__PURE__ */ u(de, {}),
+		/* @__PURE__ */ u(C, {
 			variant: "primary",
 			onClick: a,
 			children: "+ IMPORT PRESET"
@@ -1928,7 +1936,7 @@ function et({ providers: e, accounts: t, authed: n, demo: r, flashProviderId: i,
 	] }), /* @__PURE__ */ d(he, { children: [e.length === 0 && /* @__PURE__ */ u(A, { children: /* @__PURE__ */ u(V, {
 		kana: "路線を追加してください",
 		children: "NO PROVIDER LINES YET — IMPORT A PRESET"
-	}) }), e.map((e, a) => /* @__PURE__ */ u($e, {
+	}) }), e.map((e, a) => /* @__PURE__ */ u(et, {
 		provider: e,
 		index: a,
 		accounts: t[e.id] || [],
@@ -1940,16 +1948,16 @@ function et({ providers: e, accounts: t, authed: n, demo: r, flashProviderId: i,
 		onAction: s
 	}, e.id))] })] });
 }
-function tt({ open: e, selected: t, available: n, name: r, prefix: i, onPresetChange: a, onNameChange: o, onPrefixChange: s, onClose: c, onImport: f }) {
+function nt({ open: e, selected: t, available: n, name: r, prefix: i, onPresetChange: a, onNameChange: o, onPrefixChange: s, onClose: c, onImport: f }) {
 	return /* @__PURE__ */ d(q, {
 		open: e,
 		onClose: c,
 		title: "IMPORT LINE",
 		kana: "路線追加",
-		footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(w, {
+		footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(C, {
 			onClick: c,
 			children: "CANCEL"
-		}), /* @__PURE__ */ u(w, {
+		}), /* @__PURE__ */ u(C, {
 			variant: "primary",
 			disabled: !t,
 			onClick: f,
@@ -1987,16 +1995,16 @@ function tt({ open: e, selected: t, available: n, name: r, prefix: i, onPresetCh
 		]
 	});
 }
-function nt({ open: e, authMode: t, label: n, redirect: r, defaultRedirect: i, proxy: a, code: o, apiKey: s, sessionActive: c, onAuthModeChange: f, onLabelChange: p, onRedirectChange: m, onProxyChange: h, onCodeChange: g, onApiKeyChange: _, onClose: v, onSubmit: y }) {
+function rt({ open: e, authMode: t, label: n, redirect: r, defaultRedirect: i, proxy: a, code: o, apiKey: s, sessionActive: c, onAuthModeChange: f, onLabelChange: p, onRedirectChange: m, onProxyChange: h, onCodeChange: g, onApiKeyChange: _, onClose: v, onSubmit: y }) {
 	return /* @__PURE__ */ d(q, {
 		open: e,
 		onClose: v,
 		title: "CONNECT ACCOUNT",
 		kana: "口座接続",
-		footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(w, {
+		footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(C, {
 			onClick: v,
 			children: "CANCEL"
-		}), /* @__PURE__ */ u(w, {
+		}), /* @__PURE__ */ u(C, {
 			variant: "primary",
 			onClick: y,
 			children: t === "oauth" ? c ? "COMPLETE" : "START" : "SAVE"
@@ -2059,12 +2067,12 @@ function nt({ open: e, authMode: t, label: n, redirect: r, defaultRedirect: i, p
 		]
 	});
 }
-function rt({ keys: e, authed: t, name: n, selectedModels: r, modelOptions: i, newKey: a, onNameChange: o, onSelectedModelsChange: s, onCreate: c, onRevoke: f, onCloseNewKey: p, onCopyNewKey: m }) {
+function it({ keys: e, authed: t, name: n, selectedModels: r, modelOptions: i, newKey: a, onNameChange: o, onSelectedModelsChange: s, onCreate: c, onRevoke: f, onCloseNewKey: p, onCopyNewKey: m }) {
 	return /* @__PURE__ */ d(l, { children: [
 		/* @__PURE__ */ d(A, { children: [/* @__PURE__ */ u(j, { children: /* @__PURE__ */ u(M, {
 			kana: "発行",
 			children: "ISSUE KEY"
-		}) }), /* @__PURE__ */ d(K, { children: [
+		}) }), /* @__PURE__ */ d(fe, { children: [
 			/* @__PURE__ */ u(H, {
 				label: "NAME",
 				children: /* @__PURE__ */ u(U, {
@@ -2082,7 +2090,7 @@ function rt({ keys: e, authed: t, name: n, selectedModels: r, modelOptions: i, n
 					options: i
 				})
 			}),
-			/* @__PURE__ */ u(w, {
+			/* @__PURE__ */ u(C, {
 				variant: "primary",
 				onClick: c,
 				children: "CREATE"
@@ -2120,7 +2128,7 @@ function rt({ keys: e, authed: t, name: n, selectedModels: r, modelOptions: i, n
 			}),
 			/* @__PURE__ */ u(R, {
 				className: "mono",
-				children: Ne(e.last_used_at)
+				children: Pe(e.last_used_at)
 			}),
 			/* @__PURE__ */ u(R, {
 				className: "mono",
@@ -2128,7 +2136,7 @@ function rt({ keys: e, authed: t, name: n, selectedModels: r, modelOptions: i, n
 			}),
 			/* @__PURE__ */ u(R, {
 				align: "right",
-				children: /* @__PURE__ */ u(w, {
+				children: /* @__PURE__ */ u(C, {
 					tiny: !0,
 					variant: "danger",
 					"data-kid": e.id,
@@ -2145,15 +2153,15 @@ function rt({ keys: e, authed: t, name: n, selectedModels: r, modelOptions: i, n
 			onClose: p,
 			title: "KEY ISSUED",
 			kana: "発行済",
-			footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(w, {
+			footer: /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ u(C, {
 				variant: "primary",
 				onClick: m,
 				children: "COPY"
-			}), /* @__PURE__ */ u(w, {
+			}), /* @__PURE__ */ u(C, {
 				onClick: p,
 				children: "DONE"
 			})] }),
-			children: [/* @__PURE__ */ u(Y, {
+			children: [/* @__PURE__ */ u(X, {
 				as: "p",
 				style: { fontSize: "12.5px" },
 				children: "Copy it now — it is shown only once."
@@ -2164,11 +2172,11 @@ function rt({ keys: e, authed: t, name: n, selectedModels: r, modelOptions: i, n
 		})
 	] });
 }
-function it({ models: e, aliases: t, alias: n, target: r, onAliasChange: i, onTargetChange: a, onAddAlias: o }) {
+function at({ models: e, aliases: t, alias: n, target: r, onAliasChange: i, onTargetChange: a, onAddAlias: o }) {
 	return /* @__PURE__ */ d(pe, { children: [/* @__PURE__ */ d(A, { children: [/* @__PURE__ */ d(j, { children: [/* @__PURE__ */ u(M, {
 		kana: "車両一覧",
 		children: "ROLLING STOCK"
-	}), /* @__PURE__ */ d(Y, {
+	}), /* @__PURE__ */ d(X, {
 		className: "mono",
 		style: {
 			marginLeft: "auto",
@@ -2181,7 +2189,7 @@ function it({ models: e, aliases: t, alias: n, target: r, onAliasChange: i, onTa
 	}), e.map((e) => /* @__PURE__ */ d("div", {
 		className: "model-li",
 		children: [
-			/* @__PURE__ */ u("i", { style: { background: Z(e.id) } }),
+			/* @__PURE__ */ u("i", { style: { background: Q(e.id) } }),
 			e.id,
 			/* @__PURE__ */ u("span", { children: e.owned_by || "" })
 		]
@@ -2190,7 +2198,7 @@ function it({ models: e, aliases: t, alias: n, target: r, onAliasChange: i, onTa
 			kana: "別名",
 			children: "ALIASES"
 		}) }),
-		/* @__PURE__ */ d(K, { children: [
+		/* @__PURE__ */ d(fe, { children: [
 			/* @__PURE__ */ u(H, {
 				label: "ALIAS",
 				children: /* @__PURE__ */ u(U, {
@@ -2207,7 +2215,7 @@ function it({ models: e, aliases: t, alias: n, target: r, onAliasChange: i, onTa
 					onChange: (e) => a(e.target.value)
 				})
 			}),
-			/* @__PURE__ */ u(w, {
+			/* @__PURE__ */ u(C, {
 				variant: "primary",
 				onClick: o,
 				children: "MAP"
@@ -2238,26 +2246,26 @@ function it({ models: e, aliases: t, alias: n, target: r, onAliasChange: i, onTa
 		] }, e.alias))] }) }) }) })
 	] })] });
 }
-var at = 100, ot = {
+var ot = 100, st = {
 	"chat.completions": "OPENAI-CHAT",
 	completions: "OPENAI-LEGACY",
 	messages: "ANTHROPIC",
 	responses: "OPENAI-RESPONSES",
 	"ollama.chat": "OLLAMA"
-}, st = (e) => ot[e] ?? e.replace(".", "-").toUpperCase(), ct = (e) => (e.includes("/") ? e.slice(e.indexOf("/") + 1) : e) || "—";
-function Q(e) {
+}, ct = (e) => st[e] ?? e.replace(".", "-").toUpperCase(), lt = (e) => (e.includes("/") ? e.slice(e.indexOf("/") + 1) : e) || "—";
+function $(e) {
 	return e < 400 ? "ok" : e === 429 ? "warn" : "err";
 }
-function lt(e) {
+function ut(e) {
 	return e < 1e3 ? e + "ms" : (e / 1e3).toFixed(1) + "s";
 }
-function $(e) {
+function dt(e) {
 	return e == null ? "—" : e.toLocaleString("en-US").replace(/,/g, " ");
 }
-function ut(e) {
+function ft(e) {
 	return !e.output_tokens || e.duration_ms <= 0 ? null : e.output_tokens / (e.duration_ms / 1e3);
 }
-function dt(e) {
+function pt(e) {
 	if (!e) return "—";
 	let t = e;
 	try {
@@ -2265,22 +2273,22 @@ function dt(e) {
 	} catch {}
 	return t.length > 4e4 ? t.slice(0, 4e4) + `\n… truncated (${t.length.toLocaleString()} chars)` : t;
 }
-function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean: f, onOpenLog: p, onCloseDetail: m }) {
-	let [h, g] = c(""), [_, v] = c("all"), [y, b] = c("all"), [x, S] = c(at), C = (e) => {
+function mt({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean: f, onOpenLog: p, onCloseDetail: m }) {
+	let [h, g] = c(""), [_, v] = c("all"), [y, b] = c("all"), [x, S] = c(ot), w = (e) => {
 		if (!e) return "—";
 		if (e.startsWith("unresolved:")) return "unresolved";
 		let t = n.find((t) => t.id === e);
 		return t ? t.name || t.provider : e.slice(0, 8);
 	}, T = (e) => {
 		let t = n.findIndex((t) => t.id === e);
-		return t >= 0 ? X(n[t], t) : "var(--faint)";
+		return t >= 0 ? Z(n[t], t) : "var(--faint)";
 	}, E = o(() => (t ?? []).filter((e) => !(_ === "ok" && e.status >= 400 || _ === "err" && e.status < 400 || y !== "all" && e.provider_id !== y || h.trim() && ![
 		e.requested_model,
 		e.resolved_model,
 		e.endpoint,
 		e.account_label,
 		e.api_key_name,
-		C(e.provider_id),
+		w(e.provider_id),
 		String(e.status),
 		e.id
 	].join(" ").toLowerCase().includes(h.trim().toLowerCase()))), [
@@ -2291,7 +2299,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 		n
 	]);
 	a(() => {
-		S(at);
+		S(ot);
 	}, [
 		h,
 		_,
@@ -2301,7 +2309,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 		seq: e,
 		req: i.upstream_requests.find((t) => t.sequence_no === e),
 		resp: i.upstream_responses.find((t) => t.sequence_no === e)
-	})) : [], [i]), P = i?.log, ee = P ? ut(P) : null;
+	})) : [], [i]), P = i?.log, ee = P ? ft(P) : null;
 	return /* @__PURE__ */ d(l, { children: [/* @__PURE__ */ d(A, { children: [
 		/* @__PURE__ */ d(j, { children: [
 			/* @__PURE__ */ u(M, {
@@ -2329,12 +2337,12 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 					})
 				]
 			}),
-			/* @__PURE__ */ u(w, {
+			/* @__PURE__ */ u(C, {
 				tiny: !0,
 				onClick: s,
 				children: "REFRESH"
 			}),
-			/* @__PURE__ */ u(w, {
+			/* @__PURE__ */ u(C, {
 				tiny: !0,
 				variant: "danger",
 				onClick: f,
@@ -2420,20 +2428,20 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 					})
 				] }),
 				D.map((e) => {
-					let t = ut(e);
+					let t = ft(e);
 					return /* @__PURE__ */ d("tr", {
 						className: "lg-row",
 						onClick: () => p(e),
 						title: e.error ?? e.id,
 						children: [
 							/* @__PURE__ */ u(R, { children: /* @__PURE__ */ u("span", {
-								className: "lg-st " + Q(e.status),
+								className: "lg-st " + $(e.status),
 								children: e.status
 							}) }),
 							/* @__PURE__ */ u(R, {
 								className: "mono",
-								style: { color: Z(e.resolved_model) },
-								children: ct(e.resolved_model)
+								style: { color: Q(e.resolved_model) },
+								children: lt(e.resolved_model)
 							}),
 							/* @__PURE__ */ u(R, {
 								className: "mono mut",
@@ -2442,11 +2450,11 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 							/* @__PURE__ */ u(R, { children: e.provider_id ? /* @__PURE__ */ u("span", {
 								className: "lg-prov mono",
 								style: { "--pc": T(e.provider_id) },
-								children: C(e.provider_id).toUpperCase()
+								children: w(e.provider_id).toUpperCase()
 							}) : "—" }),
 							/* @__PURE__ */ d(R, { children: [/* @__PURE__ */ u("span", {
 								className: "chip lg-proto",
-								children: st(e.endpoint)
+								children: ct(e.endpoint)
 							}), e.is_stream && /* @__PURE__ */ u("span", {
 								className: "chip lg-sse",
 								children: "SSE"
@@ -2465,7 +2473,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 								children: [
 									/* @__PURE__ */ d("i", {
 										className: "ti",
-										children: ["TI: ", $(e.input_tokens)]
+										children: ["TI: ", dt(e.input_tokens)]
 									}),
 									/* @__PURE__ */ u("span", {
 										className: "mut",
@@ -2473,7 +2481,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 									}),
 									/* @__PURE__ */ d("i", {
 										className: "to",
-										children: ["TO: ", $(e.output_tokens)]
+										children: ["TO: ", dt(e.output_tokens)]
 									})
 								]
 							}),
@@ -2491,12 +2499,12 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 							/* @__PURE__ */ u(R, {
 								className: "mono mut",
 								align: "right",
-								children: lt(e.duration_ms)
+								children: ut(e.duration_ms)
 							}),
 							/* @__PURE__ */ u(R, {
 								className: "mono mut",
 								align: "right",
-								children: Pe(new Date(e.created_at))
+								children: Fe(new Date(e.created_at))
 							})
 						]
 					}, e.id);
@@ -2505,9 +2513,9 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 					colSpan: 11,
 					align: "center",
 					style: { padding: "12px" },
-					children: /* @__PURE__ */ d(w, {
+					children: /* @__PURE__ */ d(C, {
 						tiny: !0,
-						onClick: () => S((e) => e + 2 * at),
+						onClick: () => S((e) => e + 2 * ot),
 						children: [
 							"SHOW MORE (",
 							E.length - x,
@@ -2526,7 +2534,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 		title: "REQUEST PIPELINE",
 		kana: "経路",
 		wide: !0,
-		footer: /* @__PURE__ */ u(w, {
+		footer: /* @__PURE__ */ u(C, {
 			onClick: m,
 			children: "CLOSE"
 		}),
@@ -2534,12 +2542,12 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 			className: "lg-sum mono",
 			children: [
 				/* @__PURE__ */ u("span", {
-					className: "lg-st " + Q(P.status),
+					className: "lg-st " + $(P.status),
 					children: P.status
 				}),
 				/* @__PURE__ */ u("span", {
 					className: "chip lg-proto",
-					children: st(P.endpoint)
+					children: ct(P.endpoint)
 				}),
 				P.is_stream && /* @__PURE__ */ u("span", {
 					className: "chip lg-sse",
@@ -2547,12 +2555,12 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 				}),
 				/* @__PURE__ */ u("span", {
 					className: "chip",
-					style: { color: Z(P.resolved_model) },
-					children: ct(P.resolved_model)
+					style: { color: Q(P.resolved_model) },
+					children: lt(P.resolved_model)
 				}),
 				P.provider_id && /* @__PURE__ */ u("span", {
 					className: "chip",
-					children: C(P.provider_id)
+					children: w(P.provider_id)
 				}),
 				P.account_label && /* @__PURE__ */ u("span", {
 					className: "chip",
@@ -2564,19 +2572,19 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 				}),
 				/* @__PURE__ */ u("span", {
 					className: "chip",
-					children: lt(P.duration_ms)
+					children: ut(P.duration_ms)
 				}),
 				/* @__PURE__ */ d("span", {
 					className: "chip lg-tokens",
 					children: [
 						/* @__PURE__ */ d("i", {
 							className: "ti",
-							children: ["TI: ", $(P.input_tokens)]
+							children: ["TI: ", dt(P.input_tokens)]
 						}),
 						" · ",
 						/* @__PURE__ */ d("i", {
 							className: "to",
-							children: ["TO: ", $(P.output_tokens)]
+							children: ["TO: ", dt(P.output_tokens)]
 						})
 					]
 				}),
@@ -2608,7 +2616,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 							/* @__PURE__ */ u("b", { children: "CLIENT → ROUTER" }),
 							/* @__PURE__ */ u("span", {
 								className: "chip lg-proto",
-								children: st(P.endpoint)
+								children: ct(P.endpoint)
 							}),
 							/* @__PURE__ */ u("span", {
 								className: "mut mono",
@@ -2617,7 +2625,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 						]
 					}), /* @__PURE__ */ u("pre", {
 						className: "lg-json",
-						children: dt(P.client_body)
+						children: pt(P.client_body)
 					})]
 				}),
 				N.map((t) => /* @__PURE__ */ d(e, { children: [t.req && /* @__PURE__ */ d("div", {
@@ -2625,10 +2633,10 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 					children: [/* @__PURE__ */ d("div", {
 						className: "lg-step-h",
 						children: [
-							/* @__PURE__ */ d("b", { children: ["ROUTER → ", C(t.req.provider_id).toUpperCase()] }),
+							/* @__PURE__ */ d("b", { children: ["ROUTER → ", w(t.req.provider_id).toUpperCase()] }),
 							/* @__PURE__ */ u("span", {
 								className: "chip",
-								children: ct(t.req.model)
+								children: lt(t.req.model)
 							}),
 							N.length > 1 && /* @__PURE__ */ d("span", {
 								className: "mut",
@@ -2637,16 +2645,16 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 						]
 					}), /* @__PURE__ */ u("pre", {
 						className: "lg-json",
-						children: dt(t.req.raw_body)
+						children: pt(t.req.raw_body)
 					})]
 				}), t.resp && /* @__PURE__ */ d("div", {
 					className: "lg-step resp" + (t.resp.upstream_status >= 400 ? " bad" : ""),
 					children: [/* @__PURE__ */ d("div", {
 						className: "lg-step-h",
 						children: [
-							/* @__PURE__ */ d("b", { children: [C(t.resp.provider_id).toUpperCase(), " → ROUTER"] }),
+							/* @__PURE__ */ d("b", { children: [w(t.resp.provider_id).toUpperCase(), " → ROUTER"] }),
 							/* @__PURE__ */ u("span", {
-								className: "lg-st " + Q(t.resp.upstream_status),
+								className: "lg-st " + $(t.resp.upstream_status),
 								children: t.resp.upstream_status
 							}),
 							N.length > 1 && /* @__PURE__ */ d("span", {
@@ -2656,7 +2664,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 						]
 					}), /* @__PURE__ */ u("pre", {
 						className: "lg-json",
-						children: dt(t.resp.raw_body)
+						children: pt(t.resp.raw_body)
 					})]
 				})] }, t.seq)),
 				N.length === 0 && !P.error && /* @__PURE__ */ d("div", {
@@ -2674,7 +2682,7 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 					children: [/* @__PURE__ */ d("div", {
 						className: "lg-step-h",
 						children: [/* @__PURE__ */ u("b", { children: "ROUTER → CLIENT" }), /* @__PURE__ */ u("span", {
-							className: "lg-st " + Q(P.status),
+							className: "lg-st " + $(P.status),
 							children: P.status
 						})]
 					}), /* @__PURE__ */ u("pre", {
@@ -2686,33 +2694,33 @@ function ft({ logs: t, providers: n, authed: r, detail: i, onRefresh: s, onClean
 		})] })
 	})] });
 }
-function pt({ demo: e, authed: t, authStatus: n, settingsJson: r, onSettingsJsonChange: i, onSave: a, onSignOut: o }) {
+function ht({ demo: e, authed: t, authStatus: n, settingsJson: r, onSettingsJsonChange: i, onSave: a, onSignOut: o }) {
 	return /* @__PURE__ */ d(me, { children: [/* @__PURE__ */ d(A, { children: [/* @__PURE__ */ u(j, { children: /* @__PURE__ */ u(M, {
 		kana: "改札",
 		children: "GUARD"
-	}) }), e ? /* @__PURE__ */ d(G, { children: [
-		/* @__PURE__ */ u(J, {
+	}) }), e ? /* @__PURE__ */ d(K, { children: [
+		/* @__PURE__ */ u(Y, {
 			label: "MODE",
 			children: "demo — guard preview"
 		}),
-		/* @__PURE__ */ u(J, {
+		/* @__PURE__ */ u(Y, {
 			label: "AUTH",
 			children: "enabled"
 		}),
-		/* @__PURE__ */ u(J, {
+		/* @__PURE__ */ u(Y, {
 			label: "SESSION",
 			children: "admin"
 		})
-	] }) : n ? /* @__PURE__ */ d(G, { children: [
-		/* @__PURE__ */ u(J, {
+	] }) : n ? /* @__PURE__ */ d(K, { children: [
+		/* @__PURE__ */ u(Y, {
 			label: "AUTH REQUIRED",
 			children: n.auth_required ? "yes" : "no"
 		}),
-		/* @__PURE__ */ u(J, {
+		/* @__PURE__ */ u(Y, {
 			label: "SETUP COMPLETE",
 			children: n.setup_complete ? "yes" : "no"
 		}),
-		/* @__PURE__ */ u(J, {
+		/* @__PURE__ */ u(Y, {
 			label: "SESSION",
 			children: t ? "authenticated" : "anonymous"
 		}),
@@ -2722,12 +2730,12 @@ function pt({ demo: e, authed: t, authStatus: n, settingsJson: r, onSettingsJson
 				gap: 8,
 				marginTop: 4
 			},
-			children: t && n.auth_required && /* @__PURE__ */ u(w, {
+			children: t && n.auth_required && /* @__PURE__ */ u(C, {
 				onClick: o,
 				children: "SIGN OUT"
 			})
 		}),
-		/* @__PURE__ */ u(Y, {
+		/* @__PURE__ */ u(X, {
 			as: "p",
 			style: {
 				fontSize: "12px",
@@ -2735,19 +2743,19 @@ function pt({ demo: e, authed: t, authStatus: n, settingsJson: r, onSettingsJson
 			},
 			children: "The admin password is set in the CLI on first run, or via KOU_ROUTER_ADMIN_PASSWORD in non-interactive environments."
 		})
-	] }) : /* @__PURE__ */ u(G, { children: /* @__PURE__ */ u(J, {
+	] }) : /* @__PURE__ */ u(K, { children: /* @__PURE__ */ u(Y, {
 		label: "STATUS",
 		children: "unreachable"
 	}) })] }), /* @__PURE__ */ d(A, { children: [/* @__PURE__ */ d(j, { children: [/* @__PURE__ */ u(M, {
 		kana: "設定",
 		children: "ROUTER SETTINGS"
-	}), /* @__PURE__ */ u(w, {
+	}), /* @__PURE__ */ u(C, {
 		tiny: !0,
 		variant: "primary",
 		style: { marginLeft: "auto" },
 		onClick: a,
 		children: "SAVE"
-	})] }), /* @__PURE__ */ u(G, { children: /* @__PURE__ */ u(ne, {
+	})] }), /* @__PURE__ */ u(K, { children: /* @__PURE__ */ u(ne, {
 		className: "mono",
 		spellCheck: !1,
 		placeholder: "{ }",
@@ -2756,4 +2764,4 @@ function pt({ demo: e, authed: t, authStatus: n, settingsJson: r, onSettingsJson
 	}) })] })] });
 }
 //#endregion
-export { x as Ambience, ae as AppShell, m as AuroraBackground, S as Badge, w as Button, A as Card, j as CardHeader, M as CardTitle, P as Chip, v as CustomCursor, I as DataTable, we as DefinitionList, ee as Divider, B as Dropdown, h as EmberCanvas, V as Empty, p as FINE, H as Field, K as FormRow, ge as Inline, U as Input, Ae as KOU_VIEW_META, Ee as KanaText, ie as Kbd, J as KeyValue, Ze as KouAmbience, nt as KouConnectAccountModal, Ue as KouDeparturesBoard, y as KouFxLayers, Ve as KouGateScreen, tt as KouImportLineModal, We as KouIngressChips, rt as KouKeysView, ft as KouLogsView, it as KouModelsView, et as KouProvidersView, Re as KouRail, pt as KouSettingsView, Ge as KouSignals, Je as KouStatsStrip, Xe as KouSwitchyard, Be as KouTopBar, W as Lamp, Se as LineDot, oe as MainPane, N as MetricCard, q as Modal, ye as ModeChip, pe as ModelsGrid, Te as MonoText, te as MultiDropdown, Y as MutedText, le as OverviewGrid, G as Pad, T as Panel, E as PanelHeader, D as PanelTitle, _ as PointerSpotlight, Ce as ProviderDot, f as REDUCED, _e as ResponsiveGrid, re as Select, me as SettingsGrid, ue as SideStack, xe as SignalPost, fe as Spacer, O as Spark, g as SparkCanvas, he as Stack, be as StatusBadge, R as TableCell, z as TableEmptyRow, L as TableHeadCell, F as TableScroll, ne as TextArea, k as TiltCard, ke as ToastProvider, de as Toolbar, ce as ViewSection, se as Views, C as cx, Me as lineCode, X as lineColor, Z as modelColor, b as useKouAmbience, Oe as useToast };
+export { x as Ambience, ie as AppShell, m as AuroraBackground, S as Badge, C as Button, A as Card, j as CardHeader, M as CardTitle, P as Chip, v as CustomCursor, I as DataTable, we as DefinitionList, B as Dropdown, h as EmberCanvas, V as Empty, p as FINE, H as Field, fe as FormRow, ge as Inline, U as Input, je as KOU_VIEW_META, De as KanaText, Y as KeyValue, Qe as KouAmbience, rt as KouConnectAccountModal, We as KouDeparturesBoard, y as KouFxLayers, He as KouGateScreen, nt as KouImportLineModal, Ge as KouIngressChips, it as KouKeysView, mt as KouLogsView, at as KouModelsView, tt as KouProvidersView, ze as KouRail, ht as KouSettingsView, Ke as KouSignals, Ye as KouStatsStrip, Ze as KouSwitchyard, Ve as KouTopBar, W as Lamp, Se as LineDot, ae as MainPane, N as MetricCard, q as Modal, ye as ModeChip, pe as ModelsGrid, Ee as MonoText, te as MultiDropdown, X as MutedText, ce as OverviewGrid, K as Pad, w as Panel, T as PanelHeader, E as PanelTitle, _ as PointerSpotlight, Ce as ProviderDot, f as REDUCED, _e as ResponsiveGrid, re as Select, me as SettingsGrid, le as SideStack, xe as SignalPost, de as Spacer, D as Spark, g as SparkCanvas, he as Stack, be as StatusBadge, R as TableCell, z as TableEmptyRow, L as TableHeadCell, F as TableScroll, ne as TextArea, O as TiltCard, Ae as ToastProvider, ue as Toolbar, se as ViewSection, oe as Views, Ne as lineCode, Z as lineColor, Q as modelColor, b as useKouAmbience, ke as useToast };

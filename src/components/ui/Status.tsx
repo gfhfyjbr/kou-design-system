@@ -1,7 +1,10 @@
 import type { HTMLAttributes, ReactNode } from 'react'
-import { cx } from '../../lib/cx'
 import { Badge } from './Badge'
 import { Lamp } from './Lamp'
+
+function cx(...parts: Array<string | false | null | undefined>) {
+  return parts.filter(Boolean).join(' ')
+}
 
 export type ModeState = 'connecting' | 'live' | 'demo'
 export type SignalTone = 'ok' | 'warn' | 'err' | 'idle' | 'off'
