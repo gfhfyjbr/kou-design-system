@@ -5,6 +5,7 @@ import {
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
 } from 'react'
+import { cx } from '../../lib/cx'
 
 export function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -17,18 +18,18 @@ export function Field({ label, children }: { label: string; children: ReactNode 
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
   function Input({ className, ...rest }, ref) {
-    return <input ref={ref} className={['inp', className ?? ''].filter(Boolean).join(' ')} {...rest} />
+    return <input ref={ref} className={cx('inp', className)} {...rest} />
   },
 )
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(
   function TextArea({ className, ...rest }, ref) {
-    return <textarea ref={ref} className={['inp', className ?? ''].filter(Boolean).join(' ')} {...rest} />
+    return <textarea ref={ref} className={cx('inp', className)} {...rest} />
   },
 )
 
 export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSelectElement>>(
   function Select({ className, ...rest }, ref) {
-    return <select ref={ref} className={['inp', className ?? ''].filter(Boolean).join(' ')} {...rest} />
+    return <select ref={ref} className={cx('inp', className)} {...rest} />
   },
 )

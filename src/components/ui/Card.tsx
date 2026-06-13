@@ -1,11 +1,8 @@
 import type { HTMLAttributes, ReactNode } from 'react'
+import { cx } from '../../lib/cx'
 import { Panel, PanelHeader, PanelTitle } from './Panel'
 import { Spark } from './Spark'
 import { TiltCard } from './TiltCard'
-
-function cx(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(' ')
-}
 
 export function Card(props: HTMLAttributes<HTMLDivElement>) {
   return <Panel {...props} />

@@ -1,8 +1,5 @@
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
-
-function cx(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(' ')
-}
+import { cx } from '../../lib/cx'
 
 type DivProps = HTMLAttributes<HTMLDivElement>
 
