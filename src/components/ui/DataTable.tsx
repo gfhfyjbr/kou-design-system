@@ -1,8 +1,5 @@
 import type { HTMLAttributes, ReactNode, TableHTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from 'react'
-
-function cx(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(' ')
-}
+import { cx } from '../../lib/cx'
 
 export function TableScroll({
   className,

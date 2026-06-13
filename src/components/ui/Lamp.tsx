@@ -1,3 +1,5 @@
+import { cx } from '../../lib/cx'
+
 interface LampProps {
   tone?: 'ok' | 'warn' | 'err' | 'idle'
   pulse?: boolean
@@ -5,11 +7,5 @@ interface LampProps {
 }
 
 export function Lamp({ tone = 'idle', pulse, on }: LampProps) {
-  const cls = [
-    'lamp',
-    tone !== 'idle' ? tone : '',
-    pulse ? 'pulse' : '',
-    on ? 'on' : '',
-  ].filter(Boolean).join(' ')
-  return <span className={cls} />
+  return <span className={cx('lamp', tone !== 'idle' && tone, pulse && 'pulse', on && 'on')} />
 }
