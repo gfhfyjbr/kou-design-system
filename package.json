@@ -1,0 +1,51 @@
+{
+  "name": "@kou/ui-kit",
+  "version": "0.1.0",
+  "description": "Kou Router React design system, UI kit, effects, and Storybook stories.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfhfyjbr/kou-design-system.git"
+  },
+  "homepage": "https://github.com/gfhfyjbr/kou-design-system#readme",
+  "bugs": {
+    "url": "https://github.com/gfhfyjbr/kou-design-system/issues"
+  },
+  "sideEffects": [
+    "./dist/styles.css",
+    "./src/styles/kou.css"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./src/styles.css": "./src/styles/kou.css"
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json && mkdir -p dist && cp src/styles/kou.css dist/styles.css",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build"
+  },
+  "peerDependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.4.4",
+    "@storybook/react-vite": "^10.4.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "storybook": "^10.4.4",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"Lamp.d.ts","sourceRoot":"","sources":["../../../src/components/ui/Lamp.tsx"],"names":[],"mappings":"AAAA,UAAU,SAAS;IACjB,IAAI,CAAC,EAAE,IAAI,GAAG,MAAM,GAAG,KAAK,GAAG,MAAM,CAAA;IACrC,KAAK,CAAC,EAAE,OAAO,CAAA;IACf,EAAE,CAAC,EAAE,OAAO,CAAA;CACb;AAED,wBAAgB,IAAI,CAAC,EAAE,IAAa,EAAE,KAAK,EAAE,EAAE,EAAE,EAAE,SAAS,+BAQ3D"}
